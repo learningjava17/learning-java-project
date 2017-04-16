@@ -12,7 +12,7 @@ public interface UserDAO {
 
     UserEntity loadUserById(Integer userId) throws DaoException;
 
-    UserEntity storeUser(UserEntity bean) throws DaoException;
+    UserEntity storeUser(UserEntity user) throws DaoException;
 
     void storeUsers(List<UserEntity> users) throws DaoException;
 
