@@ -1,6 +1,5 @@
 package com.yellocode.dao.mysql;
 
-import com.yellocode.dao.UserDAO;
 import com.yellocode.dao.entity.UserEntity;
 import com.yellocode.dao.exception.DaoException;
 import com.yellocode.dao.mysql.db.ConnectionPool;
