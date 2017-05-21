@@ -32,7 +32,6 @@ public class UserDAO {
         Session session = null;
         try {
             session = ManagerSessionFactory.getSession();
-            // JPQL
             Query query = session.createQuery("select u from User u where email = ?", User.class);
             query.setParameter(0, email);
             users = query.getResultList();

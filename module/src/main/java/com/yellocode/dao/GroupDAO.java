@@ -1,19 +1,66 @@
 package com.yellocode.dao;
 
 
-import com.yellocode.dao.entity.GroupEntity;
-import com.yellocode.dao.entity.UserEntity;
-import com.yellocode.dao.exception.DaoException;
+import com.yellocode.domain.Group;
+import org.hibernate.Session;
 
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public interface GroupDAO {
+public class GroupDAO {
 
-    List<GroupEntity> loadAllGroups() throws DaoException;
 
-    GroupEntity CreateNewGroup(String groupName) throws DaoException;
+    public Group getById(Long id) {
+        Group group  = null;
+        Session session = null;
+        try {
+            session = ManagerSessionFactory.getSession();
+            group = session.get(Group.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return group;
+    }
 
-    void updateGroup(UserEntity user) throws DaoException;
+    public List<Group> getAll() {
+        List<Group> groups = null;
+        Session session = null;
+        try {
+            session = ManagerSessionFactory.getSession();
+            CriteriaQuery query = session.getCriteriaBuilder().createQuery(Group.class);
+            query.from(Group.class);
+            groups = session.createQuery(query).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return groups;
+    }
 
-    void removeGroup(Integer groupName) throws DaoException;
+    public void save(Group group) {
+        Session session = null;
+        try {
+            session = ManagerSessionFactory.getSession();
+            session.beginTransaction();
+            session.save(group);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
 }

@@ -18,9 +18,6 @@ public class User {
     @Column(name = "name", nullable = false, insertable = true, updatable = true, length = 255)
     private String name;
 
-      @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<Playlist> playlist;
-
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_group", joinColumns = {
             @JoinColumn(name = "user_id", nullable = false, updatable = true)
@@ -67,14 +64,6 @@ public class User {
         this.groups = groups;
     }
 
-    public List<Playlist> getPlaylist() {
-        return playlist;
-    }
-
-    public void setPlaylist(List<Playlist> playlist) {
-        this.playlist = playlist;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -82,7 +71,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
-                ", playlist=" + playlist +
                 ", groups=" + groups +
                 '}';
     }

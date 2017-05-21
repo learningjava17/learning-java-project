@@ -13,10 +13,10 @@ public class Playlist {
     @Column(name = "playlist_name", nullable = false, insertable = true, updatable = true, length = 255)
     private String playlistName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = true, updatable = true)
-
-    @OneToMany(mappedBy = "track", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "track_playlist", joinColumns = {
+            @JoinColumn(name = "playlist_id", nullable = false, updatable = true)
+    }, inverseJoinColumns = { @JoinColumn(name = "track_id", nullable = false, updatable = true) })
     private List<Track> tracks;
 
     public Long getId() {

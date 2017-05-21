@@ -1,27 +1,11 @@
-package com.yellocode.domain;
-
-import javax.persistence.*;
+package com.yellocode.dto;
 
 
-@Entity
-@Table(name = "track")
-public class Track {
+public class TrackDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "track_name", nullable = false, insertable = true, updatable = true, length = 255)
     private String trackName;
-    @Column(name = "track_author", nullable = false, insertable = true, updatable = true, length = 255)
     private String trackAuthor;
-
-    public String getTrackName() {
-        return trackName;
-    }
-
-    public void setTrackName(String trackName) {
-        this.trackName = trackName;
-    }
 
     public Long getId() {
         return id;
@@ -29,6 +13,14 @@ public class Track {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTrackName() {
+        return trackName;
+    }
+
+    public void setTrackName(String trackName) {
+        this.trackName = trackName;
     }
 
     public String getTrackAuthor() {
@@ -41,7 +33,7 @@ public class Track {
 
     @Override
     public String toString() {
-        return "Track{" +
+        return "TrackDTO{" +
                 "id=" + id +
                 ", trackName='" + trackName + '\'' +
                 ", trackAuthor='" + trackAuthor + '\'' +
